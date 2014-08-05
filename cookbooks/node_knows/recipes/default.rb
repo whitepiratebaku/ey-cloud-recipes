@@ -2,7 +2,7 @@
 # Cookbook Name:: node_knows
 # Recipe:: default
 #
-node["applications"].keys do |app_name|
+node["applications"].each do |app_name, data|
   if ['app_master','app','db_master','db_slave','util'].include? node[:instance_role]
     template "/data/#{app_name}/node_knows.txt" do
       source "node_knows.erb"
