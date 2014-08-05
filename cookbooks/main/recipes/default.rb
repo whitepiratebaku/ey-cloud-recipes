@@ -1,3 +1,7 @@
+#DH
+include_recipe "mongodb"
+include_recipe "node_knows"
+
 #execute "testing" do
 #  command %Q{
 #    echo "i ran at #{Time.now}" >> /root/cheftime
@@ -61,13 +65,13 @@
 # include_recipe "resque"
 
 #uncomment to run redis.yml recipe
-# include_recipe "redis-yml"
+include_recipe "redis-yml"
 
 #uncomment to run the resque-scheduler recipe
 # include_recipe "resque-scheduler"
 
 #uncomment to run the redis recipe
-#include_recipe "redis"
+include_recipe "redis"
 
 #uncomment to run the api-keys-yml recipe
 # include_recipe "api-keys-yml"
