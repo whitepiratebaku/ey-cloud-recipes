@@ -1,6 +1,7 @@
 #DH
 include_recipe "mongodb"
 include_recipe "node_knows"
+include_recipe "primacea_config"
 
 #execute "testing" do
 #  command %Q{
