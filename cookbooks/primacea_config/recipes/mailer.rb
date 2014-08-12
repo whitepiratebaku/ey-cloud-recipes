@@ -1,14 +1,14 @@
-node["applications"].each do |app_name, data|
+if ['app_master', 'app', 'solo', 'util'].include?(node[:instance_role])
 
-	if ['app master','app'].include? node[:instance_role]
-		
-		credentials = Chef::EncryptedDataBagItem.load "secrets", app_name
+	node[:applications].each do |app, data|
 
-		template "/data/#{app_name}/shared/config/mailer.json" do
+		credentials = Chef::EncryptedDataBagItem.load "secrets", app
+
+		template "/data/#{app}/shared/config/mailer.json" do
 			source "mailer.json.erb"
 			owner node[:owner_name]
 			group node[:owner_name]
-			mode "0644"
+			mode 0655
 			variables({
 				:mail_service => 	credentials['mailer']['email']['service'],
 				:mail_username =>	credentials['mailer']['email']['auth']['user'],
@@ -18,5 +18,4 @@ node["applications"].each do |app_name, data|
 		end
 	end
 end
-
 

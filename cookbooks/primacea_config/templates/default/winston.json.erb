@@ -1,12 +1,21 @@
 {
 	"transports": [
 		{
-			"transport": "winston.transports.Syslog"
+			"transport": "Loggly"
 			,"options": {
-				"host": "localhost"
-				,"port": 514
-				,"facility": "local2"
-				,"handleExceptions": false        
+				"subdomain": "<%= @subdomain %>",
+				"inputToken": "<%= @inputToken %>",
+				"auth": {
+					"username": "<%= @username %>",
+					"password": "<%= @password %>"
+				}
+			}
+		}
+		,{
+			"transport": "File"
+			,"options": {
+				"filename": "<%= @logPath %>",
+				"handleExceptions": true
 			}
 		}
 	] 

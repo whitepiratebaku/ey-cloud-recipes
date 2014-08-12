@@ -1,19 +1,17 @@
-node["applications"].each do |app_name, data|
+if ['app_master', 'app', 'solo', 'util'].include?(node[:instance_role])
 
-	if ['app master','app'].include? node[:instance_role]
-		
-		credentials = Chef::EncryptedDataBagItem.load "secrets", app_name
+	node[:applications].each do |app, data|
 
-		template "/data/#{app_name}/shared/config/egnyte.json" do
+		credentials = Chef::EncryptedDataBagItem.load "secrets", app
+
+		template "/data/#{app}/shared/config/egnyte.json" do
 			source "egnyte.json.erb"
 			owner node[:owner_name]
 			group node[:owner_name]
-			mode "0644"
+			mode 0655
 			variables({
 				:egnyte_api_key => 	credentials['egnyte']['apiKey']
 			})
 		end
 	end
 end
-
-

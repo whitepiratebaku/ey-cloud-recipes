@@ -4,7 +4,7 @@ if ['app_master', 'app', 'solo', 'util'].include?(node[:instance_role])
   
   if redis_instance
     node[:applications].each do |app, data|
-      template "/data/#{app}/shared/config/redis.json"do
+      template "/data/#{app}/shared/config/redis.json" do
         source 'redis.json.erb'
         owner node[:owner_name]
         group node[:owner_name]
